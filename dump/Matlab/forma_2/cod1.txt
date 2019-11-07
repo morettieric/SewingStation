@@ -1,0 +1,31 @@
+//Código novo.
+//Será utilizado o modelo de PID como descrito no livro Computer Systems for Automation and Control.
+//U(s)=K(1+(1/Ti*s)+(Td*s/(1+Tfs)))
+//onde
+//Tf=Td/N;
+//N varia entre 5 e 10.
+
+//Constantes:
+K=1; //Ganho do controlador
+Ti=1; //Constante de ganho Integral
+Td=1 //Constante de ganho Diferencial
+Ts=0.1; //Tempo de amostragem;
+
+a_i=K/Ti;
+b=Td/(Td+N);
+b_1=K*Td*(1-b)
+
+//c_k= entrada, y_k=saída, e_k = erro, u_k=controle.
+e_k=c_k-y_k;
+
+//Propocional
+u_p_k=K*e_k;
+
+//Integral
+u_i_k=u_i_k_1+a_i*e_k;
+
+//Derivativo
+u_d_k=b*u_d_k_1-b_1*(y_k-y_k_1);
+
+//Final
+u_k=u_p_k+u_i_k+u_d_k;
